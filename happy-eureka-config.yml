@@ -1,6 +1,14 @@
+spring:
+  profiles:
+    active:
+    - 7001
+
+---
+
 server:
   port: 7001
 spring:
+  profiles: 7001
   application:
     name: happy-eureka7001
 eureka:
@@ -12,3 +20,37 @@ eureka:
     service-url:
       #defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
       defaultZone: http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
+
+---
+server:
+  port: 7002
+spring:
+  profiles: 7002
+  application:
+    name: happy-eureka7002
+eureka:
+  instance:
+    hostname: eureka7002.com
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      #defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7003.com:7003/eureka
+
+---
+server:
+  port: 7003
+spring:
+  profiles: 7003
+  application:
+    name: happy-eureka7003
+eureka:
+  instance:
+    hostname: eureka7003.com
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      #defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
