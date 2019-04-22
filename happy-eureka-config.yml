@@ -11,6 +11,8 @@ spring:
   profiles: 7001
   application:
     name: happy-eureka7001
+  zipkin:
+    base-url: http://localhost:9411
 eureka:
   instance:
     hostname: eureka7001.com
