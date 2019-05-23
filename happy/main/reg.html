@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>happy-sso</title>
+
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../static/css/login.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+
+        <form id="reg_form" class="form-signin">
+            <h2 class="form-signin-heading">请填写所需资料 My friend</h2>
+            <input type="text" id="account" class="form-control" placeholder="Account" name="account" required autofocus>
+            <input type="text" id="name" class="form-control" placeholder="Name" name="name" required autofocus>
+            <input type="password" id="password" class="form-control" placeholder="Password" name="password" required>
+            <input id="reg_btn" class="btn btn-lg btn-primary btn-block" type="button" value="注册">
+            <p class="err"></p>
+            <a href="#">没有账号? 前往注册</a>
+        </form>
+
+    </div> <!-- /container -->
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="../static/js/reg.js"></script>
+</body>
+</html>

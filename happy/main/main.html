@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>happy</title>
+
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="main.html">主页</a></li>
+                    <li role="presentation"><a href="#" id="login_btn">登录或注册</a></li>
+                    <li role="presentation"><a href="#">联系我们</a></li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">Happy 965</h3>
+        </div>
+
+        <div class="jumbotron">
+            <h1>Welcome <span id="friend_name"></span></h1>
+            <p class="lead">这是你最能吐露工作上所有开心的、不开心的场所</p>
+            <p>有任何想对你的老板说的,尽情开放的去说吧!</p>
+            <p><button class="btn btn-lg btn-success" data-toggle="modal" data-target="#add_company">发表您的公司吧</button></p>
+        </div>
+
+        <div class="row marketing" id="top_show">
+            <div class="col-lg-6">
+                <h3>最佳雇主</h3>
+                <div id="965companys"></div>
+                <br>
+                <a id="more_965_btn">查看更多》</a>
+            </div>
+
+            <div class="col-lg-6">
+                <h3>糟糕雇主</h3>
+                <div id="996companys"></div>
+                <br>
+                <a id="more_996_btn">查看更多》</a>
+            </div>
+        </div>
+
+        <div class="row marketing" id="search_show">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="输入公司名称查找.." id="search_input">
+                        <span class="input-group-btn">
+                            <button id="search_btn" class="btn btn-default" type="button">查询!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div id="company_list" class="row"></div>
+            <nav aria-label="Page navigation" class="page">
+                <ul class="pagination" id="company_page_ul">
+
+
+                </ul>
+            </nav>
+        </div>
+
+
+        <div class="modal fade" id="add_company" tabindex="-1" role="dialog" aria-labelledby="company_list_modal_label">
+            <div class="modal-dialog company_modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="company_list_modal_label">添加公司</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="company_form" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">公司名 <label class="red">*</label></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="company_name" name="name" placeholder="公司名称">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">类别</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="type" value="1"> 965
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="type" value="2"> 996
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">标签</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="company_tags" name="tags" placeholder="评价标签,以逗号隔开">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">公司网址</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="company_href" name="href" placeholder="公司网址">
+                                </div>
+                            </div>
+                            <input type="hidden" id="company_user" name="createUser">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="add_company_btn" type="button" class="btn btn-primary">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="view_company" tabindex="-1" role="dialog" aria-labelledby="company_view_modal_label">
+            <div class="modal-dialog company_modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="company_view_modal_label">公司详情</h4>
+                    </div>
+                    <div class="modal-body row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2">公司名称</div>
+                        <div class="col-sm-9" id="company_view_name"></div>
+
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2">标签</div>
+                        <div class="col-sm-9" id="company_view_tags"></div>
+
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2">公司类别</div>
+                        <div class="col-sm-9" id="company_view_type"></div>
+
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2">公司网址</div>
+                        <div class="col-sm-9" id="company_view_href"></div>
+                    </div>
+                    <hr style="margin:0">
+                    <div class="modal-body">
+                        <div id="evaluate_list">
+
+                        </div>
+                        <nav aria-label="Page navigation" class="page">
+                            <ul class="pagination" id="evaluate_page_ul">
+
+
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="modal-footer">
+                        <form id="evaluate_form" class="form-horizontal">
+                            <input type="hidden" name="createUser" id="evaluate_user">
+                            <input type="hidden" name="companyId" id="evaluate_company">
+                            <textarea class="form-control" rows="3" name="content" id="evaluate_content"></textarea>
+                        </form>
+                        <button id="add_evaluate_btn" type="button" class="btn btn-primary">评论</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <p>&copy; 2019 zzei</p>
+        </footer>
+
+    </div> <!-- /container -->
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script src="../static/js/main.js"></script>
+    <script src="../static/js/page.js"></script>
+</body>
+</html>
